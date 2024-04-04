@@ -117,7 +117,7 @@ export default defineComponent({
       this.isLoading = true
 
       let useRss = this.useRssFeeds
-      if (channelsToLoadFromRemote.length >= 125 && !useRss) {
+      if (channelsToLoadFromRemote.length >= 1000 && !useRss) {
         showToast(
           this.$t('Subscriptions["This profile has a large number of subscriptions. Forcing RSS to avoid rate limiting"]'),
           10000
