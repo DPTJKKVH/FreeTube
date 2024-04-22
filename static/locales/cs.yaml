@@ -1,6 +1,5 @@
 # Put the name of your locale in the same language
 Locale Name: 'Čeština'
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Tato část aplikace ještě není hotova. Vraťte se později.
@@ -279,6 +278,9 @@ Settings:
       Ask Before Opening Link: Před otevřením odkazu se zeptat
       Open Link: Otevřít odkaz
       External Link Handling: Zpracování externích odkazů
+    Auto Load Next Page:
+      Label: Automaticky načíst další stránku
+      Tooltip: Automaticky načítat další stránky a komentáře.
   Theme Settings:
     Theme Settings: 'Nastavení motivu'
     Match Top Bar with Main Color: 'Přizpůsobit horní lištu hlavní barvě'
@@ -394,8 +396,6 @@ Settings:
     Enter Fullscreen on Display Rotate: Při otočení displeje přejít na celou obrazovku
     Skip by Scrolling Over Video Player: Posouvat čas posuvem kolečka myši na přehrávači
     Allow DASH AV1 formats: Povolit formáty DASH AV1
-    Comment Auto Load:
-      Comment Auto Load: Automaticky načítat komentáře
   Privacy Settings:
     Privacy Settings: 'Nastavení soukromí'
     Remember History: 'Zapamatovat historii'
@@ -411,7 +411,6 @@ Settings:
     Remove All Subscriptions / Profiles: 'Odstranit všechny odběry / profily'
     Are you sure you want to remove all subscriptions and profiles?  This cannot be undone.: 'Opravdu
       chcete odstranit všechny odběry a profily? Tato akce je nevratná.'
-    Automatically Remove Video Meta Files: Automaticky odstranit meta soubory videa
     Save Watched Videos With Last Viewed Playlist: Uložit zhlédnutá videa s naposledy
       zobrazeným playlistem
     All playlists have been removed: Všechny playlisty byly odstraněny
@@ -949,6 +948,15 @@ Playlist:
 #* Published
 #& Views
   Playlist: Playlist
+  Sort By:
+    Sort By: Seřadit podle
+    DateAddedNewest: Naposledy přidáno
+    DateAddedOldest: Nejdříve přidáno
+    AuthorAscending: Autor (A-Z)
+    AuthorDescending: Autor (Z-A)
+    VideoTitleDescending: Název (Z-A)
+    VideoTitleAscending: Název (A-Z)
+    Custom: Vlastní
 Toggle Theatre Mode: 'Přepnout režim divadla'
 Change Format:
   Change Media Formats: 'Změnit formát videa'
@@ -1057,9 +1065,6 @@ Tooltips:
 # Toast Messages
     Fetch Automatically: Při povolení tohoto nastavení bude FreeTube automaticky načítat
       vaše odběry při otevření nového okna a při přepínání profilů.
-  Privacy Settings:
-    Remove Video Meta Files: Pokud je povoleno, FreeTube automaticky odstraní meta
-      soubory vytvořené během přehrávání videa, když se stránka sledování zavře.
   External Player Settings:
     Ignore Warnings: Potlačuje varování, kdy současný externí přehrávač nepodporuje
       aktuální akci (např. obrácení seznamů skladeb apod.).
@@ -1173,3 +1178,9 @@ Close Banner: Zavřít panel
 Age Restricted:
   This channel is age restricted: Tento kanál je omezen věkem
   This video is age restricted: Toto video je omezeno věkem
+checkmark: ✓
+Display Label: '{label}: {value}'
+Feed:
+  Feed Last Updated: 'Zdroj {feedName} naposledy aktualizován: {date}'
+  Refresh Feed: Obnovit {subscriptionName}
+Moments Ago: chvílí

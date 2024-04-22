@@ -10,6 +10,11 @@ import router from '../router/index'
 export const CHANNEL_HANDLE_REGEX = /^@[\w.-]{3,30}$/
 
 const PUBLISHED_TEXT_REGEX = /(\d+)\s?([a-z]+)/i
+
+function currentLocale () {
+  return i18n.locale.replace('_', '-')
+}
+
 /**
  * @param {string} publishedText
  * @param {boolean} isLive
@@ -52,6 +57,7 @@ export function calculatePublishedDate(publishedText, isLive = false, isUpcoming
   } else if (timeFrame.startsWith('week') || timeFrame === 'w') {
     timeSpan = timeAmount * 604800000
   } else if (timeFrame.startsWith('month') || timeFrame === 'mo') {
+    // 30 day month being used
     timeSpan = timeAmount * 2592000000
   } else if (timeFrame.startsWith('year') || timeFrame === 'y') {
     timeSpan = timeAmount * 31556952000
@@ -92,43 +98,67 @@ export function toLocalePublicationString ({ publishText, isLive = false, isUpco
 
   const match = publishText.match(PUBLISHED_TEXT_REGEX)
   const singular = (match[1] === '1')
-  let translationKey = ''
+  let unit = ''
   switch (match[2].substring(0, 2)) {
     case 'se':
     case 's':
-      translationKey = 'Video.Published.Second'
+      if (singular) {
+        unit = i18n.t('Video.Published.Second')
+      } else {
+        unit = i18n.t('Video.Published.Seconds')
+      }
       break
     case 'mi':
     case 'm':
-      translationKey = 'Video.Published.Minute'
+      if (singular) {
+        unit = i18n.t('Video.Published.Minute')
+      } else {
+        unit = i18n.t('Video.Published.Minutes')
+      }
       break
     case 'ho':
     case 'h':
-      translationKey = 'Video.Published.Hour'
+      if (singular) {
+        unit = i18n.t('Video.Published.Hour')
+      } else {
+        unit = i18n.t('Video.Published.Hours')
+      }
       break
     case 'da':
     case 'd':
-      translationKey = 'Video.Published.Day'
+      if (singular) {
+        unit = i18n.t('Video.Published.Day')
+      } else {
+        unit = i18n.t('Video.Published.Days')
+      }
       break
     case 'we':
     case 'w':
-      translationKey = 'Video.Published.Week'
+      if (singular) {
+        unit = i18n.t('Video.Published.Week')
+      } else {
+        unit = i18n.t('Video.Published.Weeks')
+      }
       break
     case 'mo':
-      translationKey = 'Video.Published.Month'
+      if (singular) {
+        unit = i18n.t('Video.Published.Month')
+      } else {
+        unit = i18n.t('Video.Published.Months')
+      }
       break
     case 'ye':
     case 'y':
-      translationKey = 'Video.Published.Year'
+      if (singular) {
+        unit = i18n.t('Video.Published.Year')
+      } else {
+        unit = i18n.t('Video.Published.Years')
+      }
       break
     default:
       return publishText
   }
-  if (!singular) {
-    translationKey += 's'
-  }
 
-  const unit = i18n.t(translationKey)
   return i18n.t('Video.Publicationtemplate', { number: match[1], unit })
 }
 
@@ -574,8 +604,7 @@ export function extractNumberFromString(str) {
   }
 }
 
-export function showExternalPlayerUnsupportedActionToast(externalPlayer, actionName) {
-  const action = i18n.t(`Video.External Player.Unsupported Actions.${actionName}`)
+export function showExternalPlayerUnsupportedActionToast(externalPlayer, action) {
   const message = i18n.t('Video.External Player.UnsupportedActionTemplate', { externalPlayer, action })
   showToast(message)
 }
@@ -690,6 +719,61 @@ export function getTodayDateStrLocalTimezone() {
   // e.g. 2011-10-05T14:48:00.000Z
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString
   return timeNowStr.split('T')[0]
+}
+
+export function getRelativeTimeFromDate(date, hideSeconds = false, useThirtyDayMonths = true) {
+  if (!date) {
+    return ''
+  }
+
+  const now = new Date().getTime()
+  // Convert from ms to second
+  // For easier code interpretation the value is made to be positive
+  let timeDiffFromNow = ((now - date) / 1000)
+  let timeUnit = 'second'
+
+  if (timeDiffFromNow < 60 && hideSeconds) {
+    return i18n.t('Moments Ago')
+  }
+
+  if (timeDiffFromNow >= 60) {
+    timeDiffFromNow /= 60
+    timeUnit = 'minute'
+  }
+
+  if (timeUnit === 'minute' && timeDiffFromNow >= 60) {
+    timeDiffFromNow /= 60
+    timeUnit = 'hour'
+  }
+
+  if (timeUnit === 'hour' && timeDiffFromNow >= 24) {
+    timeDiffFromNow /= 24
+    timeUnit = 'day'
+  }
+
+  const timeDiffFromNowDays = timeDiffFromNow
+  if (timeUnit === 'day' && timeDiffFromNow >= 7) {
+    timeDiffFromNow /= 7
+    timeUnit = 'week'
+  }
+
+  /* Different months might have a different number of days.
+    In some contexts, to ensure the display is fine, we use 31.
+    In other contexts, like when working with calculatePublishedDate, we use 30. */
+  const daysInMonth = useThirtyDayMonths ? 30 : 31
+  if (timeUnit === 'week' && timeDiffFromNowDays >= daysInMonth) {
+    timeDiffFromNow = timeDiffFromNowDays / daysInMonth
+    timeUnit = 'month'
+  }
+
+  if (timeUnit === 'month' && timeDiffFromNow >= 12) {
+    timeDiffFromNow /= 12
+    timeUnit = 'year'
+  }
+
+  // Using `Math.ceil` so that -1.x days ago displayed as 1 day ago
+  // Notice that the value is turned to negative to be displayed as "ago"
+  return new Intl.RelativeTimeFormat([currentLocale(), 'en']).format(Math.ceil(-timeDiffFromNow), timeUnit)
 }
 
 /**

@@ -1,6 +1,5 @@
 # Put the name of your locale in the same language
 Locale Name: 'Türkçe'
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Uygulamanın bu bölümü henüz hazır değil. Tamamlanınca geri gelin.
@@ -57,7 +56,7 @@ Search / Go to URL: 'Ara / URL''ye git'
 Search Filters:
   Search Filters: 'Filtreler'
   Sort By:
-    Sort By: 'Sırala'
+    Sort By: 'Sıralama ölçütü'
     Most Relevant: 'En Uygun'
     Rating: 'Derecelendirme'
     Upload Date: 'Yükleme Tarihi'
@@ -278,6 +277,9 @@ Settings:
       Ask Before Opening Link: Bağlantıyı Açmadan Önce Sor
       Open Link: Bağlantıyı Aç
       External Link Handling: Harici Bağlantı İşleme
+    Auto Load Next Page:
+      Label: Sonraki Sayfayı Otomatik Yükle
+      Tooltip: Sonraki sayfaları ve yorumları otomatik olarak yükle.
   Theme Settings:
     Theme Settings: 'Tema Ayarları'
     Match Top Bar with Main Color: 'Üst Barı Ana Renk ile Eşleştir'
@@ -395,8 +397,6 @@ Settings:
     Enter Fullscreen on Display Rotate: Ekran Döndürüldüğünde Tam Ekrana Geç
     Skip by Scrolling Over Video Player: Video Oynatıcı Üzerinde Kaydırarak Atla
     Allow DASH AV1 formats: DASH AV1 biçimlerine izin ver
-    Comment Auto Load:
-      Comment Auto Load: Yorumları Otomatik Yükle
   Privacy Settings:
     Privacy Settings: 'Gizlilik Ayarları'
     Remember History: 'Geçmişi Hatırla'
@@ -412,8 +412,6 @@ Settings:
     Remove All Subscriptions / Profiles: 'Tüm Abonelikler/Profilleri Temizle'
     Are you sure you want to remove all subscriptions and profiles?  This cannot be undone.: 'Tüm
       abonelikler/profilleri temizlemek istediğinizden emin misiniz?  Geri alınamaz.'
-    Automatically Remove Video Meta Files: Video Meta Dosyalarını Otomatik Olarak
-      Kaldır
     Save Watched Videos With Last Viewed Playlist: İzlenen Videoları Son Görüntülenen
       Oynatma Listesiyle Kaydet
     All playlists have been removed: Tüm oynatma listeleri kaldırıldı
@@ -766,7 +764,7 @@ Channel:
   Added channel to your subscriptions: 'Kanal aboneliklerinize eklendi'
   Search Channel: 'Kanalda ara'
   Your search results have returned 0 results: 'Arama sonuçlarınız 0 sonuç verdi'
-  Sort By: 'Sırala'
+  Sort By: 'Sıralama ölçütü'
   Videos:
     Videos: 'Videolar'
     This channel does not currently have any videos: 'Bu kanalda şu anda herhangi
@@ -983,6 +981,15 @@ Playlist:
 #* Published
 #& Views
   Playlist: Oynatma Listesi
+  Sort By:
+    DateAddedNewest: Son eklenen önce
+    AuthorAscending: Yazar (A-Z)
+    AuthorDescending: Yazar (Z-A)
+    VideoTitleAscending: Başlık (A-Z)
+    VideoTitleDescending: Başlık (Z-A)
+    Sort By: Sıralama ölçütü
+    DateAddedOldest: İlk eklenen önce
+    Custom: Özel
 Toggle Theatre Mode: 'Tiyatro Modunu Aç/Kapat'
 Change Format:
   Change Media Formats: 'Video Biçimlerini Değiştir'
@@ -1107,9 +1114,6 @@ Tooltips:
     External Link Handling: "FreeTube'da açılamayan bir bağlantı tıklandığında öntanımlı
       davranışı seçin.\nÖntanımlı olarak FreeTube, tıklanan bağlantıyı öntanımlı tarayıcınızda
       açacaktır.\n"
-  Privacy Settings:
-    Remove Video Meta Files: Etkinleştirildiğinde, izleme sayfası kapatıldığında video
-      oynatma sırasında oluşturulan meta dosyaları otomatik olarak silinir.
   External Player Settings:
     Custom External Player Arguments: Harici oynatıcıya iletmek isteyeceğiniz, noktalı
       virgülle (';') ayrılmış özel komut satırı argümanları.
@@ -1214,3 +1218,9 @@ Close Banner: Afişi Kapat
 Age Restricted:
   This video is age restricted: Bu videoda yaş sınırlaması var
   This channel is age restricted: Bu kanalda yaş sınırlaması var
+Display Label: '{label}: {value}'
+checkmark: ✓
+Feed:
+  Refresh Feed: '{subscriptionName} yenile'
+  Feed Last Updated: '{feedName} akışı son güncelenme: {date}'
+Moments Ago: az önce

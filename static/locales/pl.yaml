@@ -1,4 +1,3 @@
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Ta część aplikacji nie jest jeszcze gotowa. Wróć później, gdy zostaną poczynione
@@ -274,6 +273,9 @@ Settings:
       Ask Before Opening Link: Zapytaj przed otworzeniem linku
       Open Link: Otwórz link
       External Link Handling: Obsługa zewnętrznych linków
+    Auto Load Next Page:
+      Tooltip: Wczytuj kolejne strony oraz komentarze automatycznie.
+      Label: Automatycznie wczytaj kolejną stronę
   Theme Settings:
     Theme Settings: 'Ustawienia wyglądu'
     Match Top Bar with Main Color: 'Dopasuj górną belkę do głównego koloru'
@@ -393,8 +395,6 @@ Settings:
     Skip by Scrolling Over Video Player: Przewijaj film kółkiem myszy na obszarze
       odtwarzacza
     Allow DASH AV1 formats: Zezwól na format AV1 DASH
-    Comment Auto Load:
-      Comment Auto Load: Ładuj komentarze automatycznie
   Subscription Settings:
     Subscription Settings: 'Ustawienia subskrypcji'
     Hide Videos on Watch: 'Ukrywaj filmy po obejrzeniu'
@@ -454,7 +454,6 @@ Settings:
       jesteś pewny/a, że chcesz usunąć wszystkie subskrypcje i profile? Nie będzie
       można tego cofnąć.
     Remove All Subscriptions / Profiles: Usuń wszystkie subskrypcje / profile
-    Automatically Remove Video Meta Files: Automatycznie usuwaj pliki metadanych filmu
     Save Watched Videos With Last Viewed Playlist: Zapisuj do historii film wraz z
       ostatnią odtwarzaną playlistą, która go zawierała
     All playlists have been removed: Wszystkie playlisty zostały usunięte
@@ -940,6 +939,15 @@ Playlist:
 #* Published
 #& Views
   Playlist: Playlista
+  Sort By:
+    VideoTitleDescending: Po tytule (Z-A)
+    VideoTitleAscending: Po tytule (A-Z)
+    Custom: Własny porządek
+    DateAddedOldest: Od najstarszych
+    DateAddedNewest: Od najnowszych
+    Sort By: Sortuj
+    AuthorAscending: Po autorze (A-Z)
+    AuthorDescending: Po autorze (Z-A)
 Toggle Theatre Mode: 'Włącz/wyłącz tryb kinowy'
 Change Format:
   Change Media Formats: 'Zmień formaty wideo'
@@ -1121,9 +1129,6 @@ Tooltips:
       H.264 DASH. Dekodowanie formatu AV1 DASH wymaga większej mocy obliczeniowej.
       W filmach, dla których ten format nie jest dostępny, zostanie użyty format H.264
       DASH.
-  Privacy Settings:
-    Remove Video Meta Files: Po włączeniu FreeTube automatycznie usunie pliki metadanych
-      utworzone podczas odtwarzania filmu, gdy strona odtwarzacza zostanie zamknięta.
   External Player Settings:
     Ignore Warnings: Nie pokazuj ostrzeżeń o nieobsługiwanych akcjach przez zewnętrzny
       odtwarzacz (n.p. odwracanie playlist, itp.).
@@ -1225,3 +1230,9 @@ Age Restricted:
   This video is age restricted: Ten film ma ograniczenie wiekowe
   This channel is age restricted: Ten kanał ma ograniczenie wiekowe
 Close Banner: Zamknij Baner
+checkmark: ✓
+Display Label: '{label}: {value}'
+Feed:
+  Refresh Feed: Odśwież „{subscriptionName}”
+  Feed Last Updated: 'Ostatnia aktualizacja „{feedName}”: {date}'
+Moments Ago: chwilę temu

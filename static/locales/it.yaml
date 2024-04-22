@@ -1,6 +1,5 @@
 # Put the name of your locale in the same language
 Locale Name: 'Italiano'
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Questa parte dell'app non è ancora pronta. Torna più tardi quando saranno stati
@@ -277,6 +276,9 @@ Settings:
       Ask Before Opening Link: Chiedi prima di aprire il link
       Open Link: Apri link
       External Link Handling: Gestione dei link esterni
+    Auto Load Next Page:
+      Label: Carica automaticamente la pagina successiva
+      Tooltip: Carica automaticamente pagine e commenti aggiuntivi.
   Theme Settings:
     Theme Settings: 'Impostazioni del tema'
     Match Top Bar with Main Color: 'Abbina la barra superiore al colore principale'
@@ -394,8 +396,6 @@ Settings:
     Enter Fullscreen on Display Rotate: Entra a schermo intero su Ruota schermo
     Skip by Scrolling Over Video Player: Salta tramite scorrimento sul lettore video
     Allow DASH AV1 formats: Consenti formati DASH AV1
-    Comment Auto Load:
-      Comment Auto Load: Carica automaticamente i commenti
   Privacy Settings:
     Privacy Settings: 'Impostazioni della privacy'
     Remember History: 'Salva la cronologia'
@@ -412,8 +412,6 @@ Settings:
       sicuro di volere eliminare tutte le iscrizioni e i profili? L'operazione non
       può essere annullata.
     Remove All Subscriptions / Profiles: Elimina tutte le iscrizioni e i profili
-    Automatically Remove Video Meta Files: Rimuovi automaticamente i metafile dai
-      video
     Save Watched Videos With Last Viewed Playlist: Salva i video guardati con l'ultima
       playlist vista
     All playlists have been removed: Tutte le playlist sono state rimosse
@@ -937,6 +935,15 @@ Playlist:
 #* Published
 #& Views
   Playlist: Playlist
+  Sort By:
+    Sort By: Ordina per
+    Custom: Personalizzato
+    VideoTitleDescending: Titolo (Z-A)
+    AuthorDescending: Autore (Z-A)
+    AuthorAscending: Autore (A-Z)
+    DateAddedNewest: Prima gli aggiunti più nuovi
+    DateAddedOldest: Prima gli aggiunti più vecchi
+    VideoTitleAscending: Titolo (A-Z)
 Toggle Theatre Mode: 'Attiva/disattiva la modalità teatro'
 Change Format:
   Change Media Formats: 'Cambia formato video'
@@ -1135,10 +1142,6 @@ Tooltips:
     Ignore Default Arguments: Non inviare argomenti predefiniti al lettore esterno
       oltre all'URL del video (ad esempio velocità di riproduzione, URL della playlist,
       ecc.). Gli argomenti personalizzati verranno comunque trasmessi.
-  Privacy Settings:
-    Remove Video Meta Files: Se abilitato, quando chiuderai la pagina di riproduzione
-      , FreeTube eliminerà automaticamente i metafile creati durante la visione del
-      video .
   Experimental Settings:
     Replace HTTP Cache: Disabilita la cache HTTP basata su disco Electron e abilita
       una cache di immagini in memoria personalizzata. Comporta un aumento dell'uso
@@ -1222,3 +1225,9 @@ Age Restricted:
   This video is age restricted: Questo video è soggetto a limiti di età
   This channel is age restricted: Questo canale è soggetto a limiti di età
 Close Banner: Chiudi banner
+checkmark: ✓
+Display Label: '{label}: {value}'
+Moments Ago: pochi istanti fa
+Feed:
+  Feed Last Updated: 'Ultimo aggiornamento del feed {feedName}: {date}'
+  Refresh Feed: Aggiorna {subscriptionName}

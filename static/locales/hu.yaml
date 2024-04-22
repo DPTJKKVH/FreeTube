@@ -1,6 +1,5 @@
 # Put the name of your locale in the same language
 Locale Name: 'Magyar'
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Az alkalmazás ezen része még nem áll készen. Térjen vissza később amikor előrelépés
@@ -286,6 +285,9 @@ Settings:
       Ask Before Opening Link: Hivatkozás megnyitása előtt kérése
       Open Link: Hivatkozás megnyitása
       External Link Handling: Külső hivatkozás kezelése
+    Auto Load Next Page:
+      Label: Következő oldal automatikus betöltése
+      Tooltip: További oldalak és megjegyzések automatikus betöltése.
   Theme Settings:
     Theme Settings: 'Téma beállítások'
     Match Top Bar with Main Color: 'Illessze a felső sávot a fő színnel'
@@ -405,8 +407,6 @@ Settings:
     Enter Fullscreen on Display Rotate: Teljes képernyős mód a kijelzőn forgatáshoz
     Skip by Scrolling Over Video Player: Kihagyás a Videolejátszó felett görgetve
     Allow DASH AV1 formats: DASH AV1 formátumok engedélyezése
-    Comment Auto Load:
-      Comment Auto Load: Megjegyzés automatikus betöltése
   Privacy Settings:
     Privacy Settings: 'Adatvédelmi beállítások'
     Remember History: 'Előzmények megjegyzése'
@@ -422,7 +422,6 @@ Settings:
     Remove All Subscriptions / Profiles: 'Összes feliratkozás és profil eltávolítása'
     Are you sure you want to remove all subscriptions and profiles?  This cannot be undone.: 'Biztosan
       törli az összes feliratkozást és profilt? A művelet nem vonható vissza.'
-    Automatically Remove Video Meta Files: Videó-metafájlok automatikus eltávolítása
     Save Watched Videos With Last Viewed Playlist: Megtekintett videók mentése az
       utoljára megtekintett lejátszási listával
     All playlists have been removed: Minden lejátszási lista eltávolításra került
@@ -976,6 +975,15 @@ Playlist:
 #* Published
 #& Views
   Playlist: Lejátszási lista
+  Sort By:
+    DateAddedOldest: Legrégebbiek elől
+    DateAddedNewest: Legújabbak elől
+    Sort By: Rendezés
+    AuthorAscending: Szerző szerint (A-Z)
+    AuthorDescending: Szerző szerint (Z-A)
+    VideoTitleAscending: Cím szerint (A-Z)
+    VideoTitleDescending: Cím szerint (Z-A)
+    Custom: Egyéni rendezés
 Toggle Theatre Mode: 'Mozi mód be-/kikapcsolása'
 Change Format:
   Change Media Formats: 'Videoformátumok módosítása'
@@ -1109,9 +1117,6 @@ Tooltips:
       H.264 formátumok. A DASH AV1 formátumok több energiát igényelnek a lejátszáshoz!
       Nem minden videónál érhetők el, ilyenkor a lejátszó a DASH H.264 formátumot
       használja helyette.
-  Privacy Settings:
-    Remove Video Meta Files: Ha engedélyezve van, a FreeTube automatikusan törli a
-      videolejátszás során létrehozott metafájlokat, amikor a nézőlapot bezárják.
   External Player Settings:
     Custom External Player Executable: Alapértelmezés szerint a FreeTube feltételezi,
       hogy a kiválasztott külső lejátszó megtalálható a PATH (ÚTVONAL) környezeti
@@ -1211,3 +1216,9 @@ Close Banner: Banner bezárása
 Age Restricted:
   This channel is age restricted: Ez a csatorna korhatáros
   This video is age restricted: Ez a videó korhatáros
+Display Label: '{label}: {value}'
+checkmark: ✓
+Feed:
+  Feed Last Updated: '{feedName} frissítve: {date}'
+  Refresh Feed: '{subscriptionName} frissítése'
+Moments Ago: épp most

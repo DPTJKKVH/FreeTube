@@ -1,4 +1,4 @@
-import { ClientType, Endpoints, Innertube, Misc, Utils, YT } from 'youtubei.js'
+import { ClientType, Endpoints, Innertube, Misc, UniversalCache, Utils, YT } from 'youtubei.js'
 import Autolinker from 'autolinker'
 import { join } from 'path'
 
@@ -39,8 +39,12 @@ const TRACKING_PARAM_NAMES = [
 async function createInnertube({ withPlayer = false, location = undefined, safetyMode = false, clientType = undefined, generateSessionLocally = true } = {}) {
   let cache
   if (withPlayer) {
-    const userData = await getUserDataPath()
-    cache = new PlayerCache(join(userData, 'player_cache'))
+    if (process.env.IS_ELECTRON) {
+      const userData = await getUserDataPath()
+      cache = new PlayerCache(join(userData, 'player_cache'))
+    } else {
+      cache = new UniversalCache(false)
+    }
   }
 
   return await Innertube.create({
@@ -331,7 +335,7 @@ export async function getLocalChannelLiveStreams(id) {
       // it has some empty fields in the protobuf but it doesn't work if you remove them)
     }))
 
-    const liveStreamsTab = new YT.Channel(null, response)
+    let liveStreamsTab = new YT.Channel(innertube.actions, response)
     const { id: channelId = id, name, thumbnailUrl } = parseLocalChannelHeader(liveStreamsTab)
 
     let videos
@@ -339,7 +343,16 @@ export async function getLocalChannelLiveStreams(id) {
     // if the channel doesn't have a live tab, YouTube returns the home tab instead
     // so we need to check that we got the right tab
     if (liveStreamsTab.current_tab?.endpoint.metadata.url?.endsWith('/streams')) {
-      videos = parseLocalChannelVideos(liveStreamsTab.videos, channelId, name)
+      // work around YouTube bug where it will return a bunch of responses with only continuations in them
+      // e.g. https://www.youtube.com/@TWLIVES/streams
+
+      let tempVideos = liveStreamsTab.videos
+      while (tempVideos.length === 0 && liveStreamsTab.has_continuation) {
+        liveStreamsTab = await liveStreamsTab.getContinuation()
+        tempVideos = liveStreamsTab.videos
+      }
+
+      videos = parseLocalChannelVideos(tempVideos, channelId, name)
     } else {
       videos = []
     }
@@ -684,14 +697,16 @@ export function parseLocalPlaylistVideo(video) {
     // the accessiblity label contains the full view count
     // the video info only contains the short view count
     if (video_.accessibility_label) {
-      const match = video_.accessibility_label.match(/([\d,.]+|no) views?$/i)
+      // the `.*\s+` at the start of the regex, ensures we match the last occurence
+      // just in case the video title also contains that pattern
+      const match = video_.accessibility_label.match(/.*\s+([\d,.]+|no)\s+views?/)
 
       if (match) {
         const count = match[1]
 
         // as it's rare that a video has no views,
         // checking the length allows us to avoid running toLowerCase unless we have to
-        if (count.length === 2 && count.toLowerCase() === 'no') {
+        if (count.length === 2 && count === 'no') {
           viewCount = 0
         } else {
           const views = extractNumberFromString(count)
@@ -705,11 +720,19 @@ export function parseLocalPlaylistVideo(video) {
 
     let publishedText
     // normal videos have 3 text runs with the last one containing the published date
+    // OR no runs and just text with the published date (if the view count is missing)
     // live videos have 2 text runs with the number of people watching
     // upcoming either videos don't have any info text or the number of people waiting,
     // but we have the premiere date for those, so we don't need the published date
-    if (video_.video_info.runs && video_.video_info.runs.length === 3) {
-      publishedText = video_.video_info.runs[2].text
+
+    if (!video_.is_upcoming && !video_.is_live) {
+      const hasRuns = !!video_.video_info.runs
+
+      if (hasRuns && video_.video_info.runs.length === 3) {
+        publishedText = video_.video_info.runs[2].text
+      } else if (!hasRuns && video_.video_info.text) {
+        publishedText = video_.video_info.text
+      }
     }
 
     const published = calculatePublishedDate(

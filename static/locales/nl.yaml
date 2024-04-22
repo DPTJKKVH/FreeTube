@@ -1,6 +1,5 @@
 # Put the name of your locale in the same language
 Locale Name: 'Nederlands'
-FreeTube: 'FreeTube'
 # Currently on Subscriptions, Playlists, and History
 'This part of the app is not ready yet. Come back later when progress has been made.': >-
   Dit gedeelte van de app is nog niet klaar. Kom later terug als er vooruitgang is
@@ -388,8 +387,6 @@ Settings:
         %s tweecijferige seconde in de video; %t driecijferige milliseconde in de
         video; %i ID van de video. U kunt ook "\" of "/" gebruiken om deelmappen aan
         te maken.'
-    Comment Auto Load:
-      Comment Auto Load: Commentaar Automatisch Laden
     Skip by Scrolling Over Video Player: Overslaan door over de videospeler te scrollen
     Allow DASH AV1 formats: DASH-AV1-bestandstypes toestaan
     Enter Fullscreen on Display Rotate: Volledig scherm bij draaien van scherm
@@ -409,8 +406,6 @@ Settings:
       u zeker dat u alle abonnementen en profielen wil verwijderen? Dit kan niet ongedaan
       worden gemaakt.
     Remove All Subscriptions / Profiles: Verwijder alle abonnementen / profielen
-    Automatically Remove Video Meta Files: Bestanden met metadata van video's automatisch
-      verwijderen
     Save Watched Videos With Last Viewed Playlist: Houd bekeken video's bij met de
       afspeellijst ‘Laatst bekeken’
     Remove All Playlists: Alle afspeel­lijsten verwijderen
@@ -1108,10 +1103,6 @@ Tooltips:
     External Link Handling: "Kies het standaard gedrag voor wanneer een link dat niet
       kan worden geopend in FreeTube is aangeklikt.\nStandaard zal FreeTube de aangeklikte
       link openen in je standaardbrowser.\n"
-  Privacy Settings:
-    Remove Video Meta Files: Wanneer ingeschakeld zal FreeTube automatisch meta bestanden
-      die worden gecreëerd tijdens het afspelen van video's verwijderen zodra de pagina
-      wordt gesloten.
   External Player Settings:
     Custom External Player Arguments: Aangepaste opdrachtregelargumenten, gescheiden
       door puntkomma's (';'), die je wil doorgeven aan de externe videospeler.
@@ -1211,3 +1202,5 @@ Age Restricted:
   This video is age restricted: Deze video heeft een leeftijds­beperking
 Trimmed input must be at least N characters long: Bij­gesneden invoer moet minimaal
   1 teken lang zijn | Bij­gesneden invoer moet minimaal {length} tekens lang zijn
+checkmark: ✓
+Display Label: '{label}: {value}'
